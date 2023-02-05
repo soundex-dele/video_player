@@ -1,17 +1,20 @@
 #pragma once
 #include <memory>
+#include <vector>
 #include <iostream>
 #include "video_frame.h"
 namespace engine {
 class Node
 {
 public:
-    void handle(std::unique_ptr<VideoFrame> frame);
-    void setNextHandler(std::shared_ptr<Node> handler);
+    void handle(std::shared_ptr<Buffer> buffer);
+    void addSink(std::shared_ptr<Node> handler);
 
 protected:
-    virtual void handleFrame(VideoFrame* frame) {}
+    virtual void handleBuffer(std::shared_ptr<Buffer> frame) {}
+    std::shared_ptr<Buffer> buffer_;
+
 private:
-    std::shared_ptr<Node> next_handler_;
+    std::vector<std::shared_ptr<Node> > next_handlers_;
 };
 }

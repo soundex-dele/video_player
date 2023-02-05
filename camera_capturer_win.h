@@ -7,6 +7,6 @@ class CameraCapturerWin : public Capturer
 public:
     void startCapture();
 private:
-    void handleFrame(VideoFrame* frame) override;
+    void handleBuffer(std::shared_ptr<Buffer> frame) override;
 };
 }

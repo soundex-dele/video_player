@@ -1,16 +1,23 @@
 #include "node.h"
 #include "video_frame.h"
 namespace engine {
-void Node::handle(std::unique_ptr<VideoFrame> frame)
+void Node::handle(std::shared_ptr<Buffer> buffer)
 {
-    handleFrame(frame.get());
-    if (next_handler_)
-        next_handler_->handle(std::move(frame));
+    handleBuffer(buffer);
+    std::shared_ptr<Buffer> cur_buffer;
+    if (buffer_)
+        cur_buffer = buffer_;
+    else
+        cur_buffer = buffer;
+    for (auto handler : next_handlers_)
+    {
+        handler->handle(cur_buffer);
+    }
+
 }
 
-void Node::setNextHandler(std::shared_ptr<Node> handler)
-{
-    next_handler_ = handler;
+void Node::addSink(std::shared_ptr<Node> handler) {
+    next_handlers_.push_back(handler);
 }
 
 } // namespace engine
