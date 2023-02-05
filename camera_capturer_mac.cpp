@@ -5,16 +5,13 @@
 #include "camera_capturer_mac.h"
 
 namespace engine {
-void CameraCapturerMac::startCapture()
-{
-    std::cout << "CameraCapturerMac::startCapture" << std::endl;
-    handle(std::make_unique<Buffer>());
+void CameraCapturerMac::startCapture() {
+  std::cout << "CameraCapturerMac::startCapture" << std::endl;
+  handle(std::make_unique<Buffer>());
 }
 
-void CameraCapturerMac::handleBuffer(std::shared_ptr<Buffer> frame)
-{
-    std::cout << "CameraCapturerMac::handleFrame" << std::endl;
-
+void CameraCapturerMac::handleBuffer(std::shared_ptr<Buffer> frame) {
+  std::cout << "CameraCapturerMac::handleFrame" << std::endl;
 }
 
-}
+}  // namespace engine

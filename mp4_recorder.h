@@ -7,16 +7,14 @@
 
 #include "recorder.h"
 namespace engine {
-class Mp4Recorder : public Recorder
-{
-public:
-    bool init();
-private:
-    void handleBuffer(std::shared_ptr<Buffer> frame) override;
+class Mp4Recorder : public Recorder {
+ public:
+  bool init();
+
+ private:
+  void handleBuffer(std::shared_ptr<Buffer> frame) override;
 };
 
-}
+}  // namespace engine
 
-
-
-#endif //VIDEOPLAYER_MP4_RECORDER_H
+#endif  // VIDEOPLAYER_MP4_RECORDER_H

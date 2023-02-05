@@ -6,10 +6,9 @@
 #define VIDEOPLAYER_RECORDER_H
 #include "node.h"
 namespace engine {
-class Recorder : public Node
-{
-public:
-private:
+class Recorder : public Node {
+ public:
+ private:
 };
-}
-#endif //VIDEOPLAYER_RECORDER_H
+}  // namespace engine
+#endif  // VIDEOPLAYER_RECORDER_H

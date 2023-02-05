@@ -7,16 +7,13 @@
 
 #include "node.h"
 namespace engine {
-class H264Encoder : public Node
-{
-public:
-    bool init();
-private:
-    void handleBuffer(std::shared_ptr<Buffer> frame) override;
+class H264Encoder : public Node {
+ public:
+  bool init() override;
+
+ private:
+  void handleBuffer(std::shared_ptr<Buffer> frame) override;
 };
-}
+}  // namespace engine
 
-
-
-
-#endif //VIDEOPLAYER_H264_ENCODER_H
+#endif  // VIDEOPLAYER_H264_ENCODER_H

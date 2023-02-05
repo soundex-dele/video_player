@@ -8,14 +8,12 @@
 
 namespace engine {
 class CameraCapturerMac : public Capturer {
-public:
-    void startCapture() override;
-private:
-    void handleBuffer(std::shared_ptr<Buffer> frame) override;
+ public:
+  void startCapture() override;
+
+ private:
+  void handleBuffer(std::shared_ptr<Buffer> frame) override;
 };
-}
+}  // namespace engine
 
-
-
-
-#endif //VIDEOPLAYER_CAMERA_CAPTURER_MAC_H
+#endif  // VIDEOPLAYER_CAMERA_CAPTURER_MAC_H

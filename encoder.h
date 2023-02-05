@@ -6,15 +6,8 @@
 #define VIDEOPLAYER_ENCODER_H
 
 #include "node.h"
-namespace engine
-{
-class Encoder : public Node
-{
+namespace engine {
+class Encoder : public Node {};
+}  // namespace engine
 
-};
-}
-
-
-
-
-#endif //VIDEOPLAYER_ENCODER_H
+#endif  // VIDEOPLAYER_ENCODER_H

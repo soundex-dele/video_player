@@ -1,1 +1,1 @@
-ffmpeg -re -stream_loop -1  -i big_buck_bunny.mp4 -vcodec copy -codec copy -f rtsp rtsp://127.0.0.1/live/test
+ffmpeg -re -stream_loop -1 -i big_buck_bunny.mp4 -vcodec copy -codec copy -f rtsp rtsp://127.0.0.1/live/test

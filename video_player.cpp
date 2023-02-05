@@ -2,48 +2,50 @@
 //
 
 #include "video_player.h"
-#include "pipeline.h"
-#include "rtsp_capturer.h"
+#include "Poco/Stopwatch.h"
+#include "Poco/Thread.h"
+#include "Poco/Timer.h"
 #include "camera_capturer_mac.h"
+#include "gl_renderer.h"
 #include "h264_encoder.h"
 #include "mp4_recorder.h"
-#include "gl_renderer.h"
-#include "Poco/Timer.h"
-#include "Poco/Thread.h"
-#include "Poco/Stopwatch.h"
+#include "pipeline.h"
+#include "rtsp_capturer.h"
 
 using namespace std;
 
 #include <iostream>
 
-int main()
-{
-	cout << "Hello CMake." << endl;
+int main() {
+  cout << "Hello CMake." << endl;
 
-	std::shared_ptr<engine::Pipeline> pipeline = std::make_shared<engine::Pipeline>();
-	std::shared_ptr<engine::RtspCapturer> capture_node = std::make_shared<engine::RtspCapturer>();
-	std::shared_ptr<engine::GlRenderer> render_node = std::make_shared<engine::GlRenderer>();
-	std::shared_ptr<engine::H264Encoder> encoder_node = std::make_shared<engine::H264Encoder>();
-	std::shared_ptr<engine::Mp4Recorder> recorder_node = std::make_shared<engine::Mp4Recorder>();
-    render_node->init();
-    encoder_node->init();
-    recorder_node->init();
-	pipeline->addNode(capture_node);
-	pipeline->addNode(render_node);
-	pipeline->addNode(encoder_node);
-	pipeline->addNode(recorder_node);
+  std::shared_ptr<engine::Pipeline> pipeline =
+      std::make_shared<engine::Pipeline>();
+  std::shared_ptr<engine::RtspCapturer> capture_node =
+      std::make_shared<engine::RtspCapturer>();
+  std::shared_ptr<engine::GlRenderer> render_node =
+      std::make_shared<engine::GlRenderer>();
+  std::shared_ptr<engine::H264Encoder> encoder_node =
+      std::make_shared<engine::H264Encoder>();
+  std::shared_ptr<engine::Mp4Recorder> recorder_node =
+      std::make_shared<engine::Mp4Recorder>();
 
-	pipeline->linkNode(capture_node, render_node);
-    pipeline->linkNode(capture_node, encoder_node);
-    pipeline->linkNode(encoder_node, recorder_node);
+  pipeline->addNode(capture_node);
+  pipeline->addNode(render_node);
+  pipeline->addNode(encoder_node);
+  pipeline->addNode(recorder_node);
 
-    capture_node->init();
-	capture_node->startCapture();
-	return 0;
+  pipeline->linkNode(capture_node, render_node);
+  pipeline->linkNode(capture_node, encoder_node);
+  pipeline->linkNode(encoder_node, recorder_node);
+
+  pipeline->run();
+
+  return 0;
 }
 ////#include <GL/glew.h>
 //#include <GLFW/glfw3.h>
-//int main(void)
+// int main(void)
 //{
 //    GLFWwindow* window;
 //    /* Initialize the library */
