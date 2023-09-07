@@ -56,19 +56,7 @@ bool RtspCapturer::init() {
   //    av_image_fill_arrays(frameRGBA->data, frameRGBA->linesize, buffer,
   //    AV_PIX_FMT_RGBA, WIDTH, HEIGHT, 1);
 
-  swsContext = sws_getContext(
-      ctx_format->streams[stream_idx]->codecpar->width,
-      ctx_format->streams[stream_idx]->codecpar->height, ctx_codec->pix_fmt,
-      ctx_format->streams[stream_idx]->codecpar->width / 2,
-      ctx_format->streams[stream_idx]->codecpar->height / 2, AV_PIX_FMT_RGBA,
-      SWS_BILINEAR, NULL, NULL, NULL);
-  if (!swsContext) {
-    std::cout << "Couldn't initialize sws_scaler" << std::endl;
-    return false;
-  }
-  frame_data =
-      new uint8_t[ctx_format->streams[stream_idx]->codecpar->width *
-                  ctx_format->streams[stream_idx]->codecpar->height * 4];
+
 }
 
 void RtspCapturer::startCapture() {
@@ -86,19 +74,14 @@ void RtspCapturer::startCapture() {
           // std::endl;
           break;
         }
-        std::cout << "frame: " << ctx_codec->frame_number << " width: "
-                  << ctx_format->streams[stream_idx]->codecpar->width
-                  << std::endl;
-        uint8_t* dest[4] = {frame_data, NULL, NULL, NULL};
-        int dest_linesize[4] = {
-            ctx_format->streams[stream_idx]->codecpar->width * 4, 0, 0, 0};
-        sws_scale(swsContext, frame->data, frame->linesize, 0,
-                  ctx_format->streams[stream_idx]->codecpar->height, dest,
-                  dest_linesize);
+//        std::cout << "frame: " << ctx_codec->frame_number << " width: "
+//                  << ctx_format->streams[stream_idx]->codecpar->width
+//                  << std::endl;
+
 
         handle(std::make_shared<VideoFrame>(
-            frame_data, ctx_format->streams[stream_idx]->codecpar->width,
-            ctx_format->streams[stream_idx]->codecpar->height));
+            frame->data, frame->linesize, ctx_format->streams[stream_idx]->codecpar->width,
+            ctx_format->streams[stream_idx]->codecpar->height, ctx_codec->pix_fmt));
       }
     }
     av_packet_unref(pkt);

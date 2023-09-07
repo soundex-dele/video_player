@@ -6,7 +6,8 @@ void CameraCapturerWin::startCapture() {
   //    handle(std::make_unique<VideoFrame>(nullptr));
 }
 
-void CameraCapturerWin::handleBuffer(std::shared_ptr<Buffer> frame) {
+std::shared_ptr<Buffer> CameraCapturerWin::handleBuffer(
+    std::shared_ptr<Buffer> buffer) {
   std::cout << "CameraCapturerWin::handleFrame" << std::endl;
 }
 

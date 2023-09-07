@@ -10,7 +10,8 @@ void CameraCapturerMac::startCapture() {
   handle(std::make_unique<Buffer>());
 }
 
-void CameraCapturerMac::handleBuffer(std::shared_ptr<Buffer> frame) {
+std::shared_ptr<Buffer> CameraCapturerMac::handleBuffer(
+    std::shared_ptr<Buffer> buffer) {
   std::cout << "CameraCapturerMac::handleFrame" << std::endl;
 }
 

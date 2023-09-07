@@ -12,7 +12,7 @@ class Mp4Recorder : public Recorder {
   bool init();
 
  private:
-  void handleBuffer(std::shared_ptr<Buffer> frame) override;
+  std::shared_ptr<Buffer> handleBuffer(std::shared_ptr<Buffer> buffer) override;
 };
 
 }  // namespace engine

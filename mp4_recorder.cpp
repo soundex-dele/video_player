@@ -6,12 +6,14 @@
 namespace engine {
 bool Mp4Recorder::init() {}
 
-void Mp4Recorder::handleBuffer(std::shared_ptr<Buffer> buffer) {
-  std::cout << "Mp4Recorder::handleBuffer" << std::endl;
+std::shared_ptr<Buffer> Mp4Recorder::handleBuffer(
+    std::shared_ptr<Buffer> buffer) {
+//  std::cout << "Mp4Recorder::handleBuffer" << std::endl;
   auto new_image = dynamic_pointer_cast<EncodedImage>(buffer);
-  if (new_image)
-    std::cout << "Mp4Recorder::get new image" << std::endl;
-  else
-    std::cout << "error image" << std::endl;
+//  if (new_image)
+//    std::cout << "Mp4Recorder::get new image" << std::endl;
+//  else
+//    std::cout << "error image" << std::endl;
+  return buffer;
 }
 }  // namespace engine

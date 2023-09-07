@@ -12,8 +12,8 @@ class Node {
   virtual void run() {}
 
  protected:
-  virtual void handleBuffer(std::shared_ptr<Buffer> frame) {}
-  std::shared_ptr<Buffer> buffer_;
+  virtual std::shared_ptr<Buffer> handleBuffer(std::shared_ptr<Buffer> buffer) {
+  }
 
  private:
   std::vector<std::shared_ptr<Node>> next_handlers_;

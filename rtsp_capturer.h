@@ -14,7 +14,10 @@ class RtspCapturer : public Capturer {
   void startCapture() override;
 
  private:
-  void handleBuffer(std::shared_ptr<Buffer> frame) override {}
+  std::shared_ptr<Buffer> handleBuffer(
+      std::shared_ptr<Buffer> buffer) override {
+    return buffer;
+  }
 
  private:
   AVFormatContext* ctx_format = nullptr;
@@ -27,7 +30,6 @@ class RtspCapturer : public Capturer {
   AVStream* vid_stream = nullptr;
   AVPacket* pkt = nullptr;
   AVFrame* frameRGBA = nullptr;
-  struct SwsContext* swsContext;
-  uint8_t* frame_data = nullptr;
+
 };
 }  // namespace engine
